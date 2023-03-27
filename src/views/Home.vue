@@ -7,9 +7,7 @@
     </ul> -->
 
     <h1>Albums</h1>
-    <ul>
-      <li v-for="album in albums" :key="album.id">{{ album.title }}</li>
-    </ul>
+    <Carousel :list="albums"></Carousel>
 
     <h1>Artists</h1>
     <ul>
@@ -25,25 +23,27 @@ import Carousel from './home/Carousel.vue';
 export default {
   name: 'home',
   components: {
-    Carousel,
+    Carousel
   },
   data() {
     return {
       songs: [],
       albums: [],
       artists: [],
+      playlist: []
     }
+  },
+  created() {
+    this.loadData('songs');
+    this.loadData('albums');
+    this.loadData('artists');
+    this.loadData('playlist');
   },
   methods: {
     async loadData(resource) {
       const {data} = await axiox.get(`/api/${resource}`);
       this[resource] = data;
     },
-  },
-  created() {
-    this.loadData('songs');
-    this.loadData('albums');
-    this.loadData('artists');
   },
 };
 </script>

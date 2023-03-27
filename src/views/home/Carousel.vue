@@ -1,10 +1,10 @@
 <template>
   <el-carousel
-  class="wrapper-carousel"
-  trigger="click"
-  :autoplay="false"
-  type="card"
-  height="200px">
+      class="wrapper-carousel"
+      trigger="click"
+      :autoplay="false"
+      type="card"
+      height="200px">
     <el-carousel-item class="item-carousel" v-for="item in list" :key="item.id">
       <h3>{{ item.title }}</h3>
       <!-- <iframe width="150" height="150" :src="item.youtube"></iframe> -->
@@ -22,8 +22,7 @@ export default {
       required: true,
     },
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
@@ -31,7 +30,7 @@ export default {
 
 .wrapper-carousel {
   :deep(.el-carousel__button) {
-      background-color: var(--grey);
+    background-color: var(--grey);
   }
 }
 
