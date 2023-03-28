@@ -1,18 +1,13 @@
 <template>
   <main class="home-page">
-    <h1>Songs</h1>
-    <Carousel :list="songs"></Carousel>
-    <!-- <ul>
-      <li v-for="song in songs" :key="song.id">{{ song.title }}</li>
-    </ul> -->
+    <h1>Artists</h1>
+    <Carousel :list="artists"></Carousel>
 
     <h1>Albums</h1>
     <Carousel :list="albums"></Carousel>
 
-    <h1>Artists</h1>
-    <ul>
-      <li v-for="artist in artists" :key="artist.id">{{ artist.name }}</li>
-    </ul>
+    <h1>Songs</h1>
+    <Carousel :list="songs"></Carousel>
   </main>
 </template>
 

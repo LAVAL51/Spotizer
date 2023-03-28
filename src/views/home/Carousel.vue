@@ -6,8 +6,7 @@
       type="card"
       height="200px">
     <el-carousel-item class="item-carousel" v-for="item in list" :key="item.id">
-      <h3>{{ item.title }}</h3>
-      <!-- <iframe width="150" height="150" :src="item.youtube"></iframe> -->
+      <h3>{{ item.title ?? item.name }}</h3>
     </el-carousel-item>
   </el-carousel>
 </template>
