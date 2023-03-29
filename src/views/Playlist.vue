@@ -41,6 +41,11 @@ export default {
   },
   methods: {
     async createPlaylist() {
+      if (this.newPlaylistName.length < 4) {
+        alert('Playlist name must be at least 4 characters long.');
+        return;
+      }
+
       const {data} = await axios.post('/api/playlists', { name: this.newPlaylistName });
       this.playlistsId.push(data.id);
       this.newPlaylistName = '';
