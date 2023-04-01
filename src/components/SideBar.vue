@@ -5,28 +5,36 @@
     </div>
 
     <div class="menu-toggle-wrap">
-       <button class="menu-toggle">
-          <span class="material-icons" @click="toggleMenu">keyboard_double_arrow_right</span>
-       </button>
+      <button class="menu-toggle">
+        <span class="material-icons" @click="toggleMenu">keyboard_double_arrow_right</span>
+      </button>
     </div>
 
     <h3 class="menu-title">Menu</h3>
     <div class="menu">
       <router-link class="button" to="/">
         <span class="material-icons">home</span>
-        <span class="text">Accueil</span>
+        <span class="text">Home</span>
       </router-link>
-      <router-link class="button" to="/playlist">
+      <router-link class="button" to="/artist">
+        <span class="material-icons">groups</span>
+        <span class="text">Artists</span>
+      </router-link>
+      <router-link class="button" to="/album">
+        <span class="material-icons">library_music</span>
+        <span class="text">Albums</span>
+      </router-link>
+      <router-link class="button" to="/song">
         <span class="material-icons">queue_music</span>
-        <span class="text">Mes Playlists</span>
+        <span class="text">Songs</span>
       </router-link>
     </div>
 
     <div class="flex"></div>
 
     <div class="copiright">
-        <span>©</span>
-        <span class="copiright-text">Kevin Wang & Anthony LAVAL 2023</span>
+      <span>©</span>
+      <span class="copiright-text">Kevin Wang & Anthony LAVAL 2023</span>
     </div>
   </aside>
 </template>
@@ -56,7 +64,7 @@ export default {
   overflow: hidden;
   min-height: 100vh;
   background-color: var(--dark);
-  color: var(--light );
+  color: var(--light);
   padding: 1rem;
 
   .flex {
@@ -71,6 +79,7 @@ export default {
 
   .menu-toggle-wrap {
     top: -3rem;
+
     .menu-toggle {
       transform: rotate(180deg);
     }
@@ -87,7 +96,7 @@ export default {
   }
 }
 
-.menu-toggle-wrap{
+.menu-toggle-wrap {
   display: flex;
   justify-content: end;
   margin-bottom: 1rem;
@@ -169,7 +178,7 @@ export default {
       transition: .2s ease-out;
     }
 
-    &:hover, ~&.router-link-exact-active {
+    &:hover, ~ &.router-link-exact-active {
       background-color: var(--dark-alt);
 
       .material-icons, .text {
