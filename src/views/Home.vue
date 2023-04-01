@@ -24,6 +24,9 @@ import Carousel from './home/Carousel.vue';
 
 export default {
   name: 'home',
+  components: {
+    Carousel
+  },
   data() {
     return {
       playlistsId: JSON.parse(localStorage.getItem('playlistsId')) || [],
