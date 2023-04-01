@@ -1,13 +1,8 @@
 <template>
-  <main class="home-page">
-    <h1>Artists</h1>
-    <Carousel :list="artists"></Carousel>
-
-    <h1>Albums</h1>
-    <Carousel :list="albums"></Carousel>
-
-    <h1>Songs</h1>
-    <Carousel :list="songs"></Carousel>
+  <main class="home-page"
+  v-for="(element, index) in list"
+  :key="index">
+    <Carousel :list="element"></Carousel>
   </main>
 </template>
 
@@ -22,22 +17,18 @@ export default {
   },
   data() {
     return {
-      songs: [],
-      albums: [],
-      artists: [],
-      playlist: []
+      list: {},
     }
   },
   created() {
     this.loadData('songs');
     this.loadData('albums');
     this.loadData('artists');
-    this.loadData('playlist');
   },
   methods: {
     async loadData(resource) {
       const {data} = await axiox.get(`/api/${resource}`);
-      this[resource] = data;
+      this.list[resource] = data;
     },
   },
 };
