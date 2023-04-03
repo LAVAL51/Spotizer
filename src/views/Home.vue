@@ -29,20 +29,6 @@ export default {
   },
   data() {
     return {
-<<<<<<< HEAD
-      list: {},
-    }
-  },
-  created() {
-    this.loadData('songs');
-    this.loadData('albums');
-    this.loadData('artists');
-  },
-  methods: {
-    async loadData(resource) {
-      const {data} = await axiox.get(`/api/${resource}`);
-      this.list[resource] = data;
-=======
       playlistsId: JSON.parse(localStorage.getItem('playlistsId')) || [],
       playlists: [],
       newPlaylistName: ''
@@ -70,7 +56,6 @@ export default {
       this.playlistsId.push(data.id);
       this.newPlaylistName = '';
       await this.fetchPlaylists();
->>>>>>> cff2b202f8d5bc63ef4e20510b9a4cba4d78e185
     },
     async fetchPlaylists() {
       const requests = this.playlistsId.map(id => axios.get(`/api/playlists/${id}`));
