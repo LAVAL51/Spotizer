@@ -1,7 +1,7 @@
 <template>
   <main class="artist-page">
     <h1>Artists</h1>
-    <data-table :table-data="artists" :table-prop="tableProp" :table-label="tableLabel"></data-table>
+    <data-table :table-data="artists" :table-columns="columns"></data-table>
   </main>
 </template>
 
@@ -17,8 +17,9 @@ export default {
   data() {
     return {
       artists: [],
-      tableProp: 'name',
-      tableLabel: 'Name',
+      columns: [
+        { prop: 'name', label: 'Name' },
+      ],
     }
   },
   async created() {

@@ -1,7 +1,7 @@
 <template>
   <main class="song-page">
     <h1>Song</h1>
-    <data-table :table-data="songs" :table-prop="tableProp" :table-label="tableLabel"></data-table>
+    <data-table :table-data="songs" :table-columns="columns"></data-table>
   </main>
 </template>
 
@@ -17,8 +17,11 @@ export default {
   data() {
     return {
       songs: [],
-      tableProp: 'title',
-      tableLabel: 'Title',
+      columns: [
+        { prop: 'title', label: 'Title' },
+        { prop: 'length', label: 'Length' },
+        { prop: 'youtube', label: 'Youtube' },
+      ],
     }
   },
   async created() {

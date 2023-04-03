@@ -1,7 +1,7 @@
 <template>
   <main class="home-page">
     <h1>My playlists</h1>
-    <Carousel :list="playlists"></Carousel>
+    <carousel :list="playlists"></carousel>
 
     <form @submit.prevent="createPlaylist">
       <label>
@@ -20,18 +20,18 @@
 
 <script>
 import axios from 'axios';
-import Carousel from './components/Carousel.vue';
+import carousel from './components/Carousel.vue';
 
 export default {
   name: 'home',
   components: {
-    Carousel
+    carousel
   },
   data() {
     return {
       playlistsId: JSON.parse(localStorage.getItem('playlistsId')) || [],
       playlists: [],
-      newPlaylistName: ''
+      newPlaylistName: '',
     };
   },
   async created() {
@@ -65,7 +65,7 @@ export default {
     clearLocalStorage() {
       localStorage.clear();
       this.playlistsId = [];
-    }
+    },
   },
 };
 </script>

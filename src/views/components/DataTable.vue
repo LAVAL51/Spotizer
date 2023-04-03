@@ -1,6 +1,6 @@
 <template>
   <el-table :data="tableData" style="width: 100%">
-    <el-table-column :prop="tableProp" :label="tableLabel"></el-table-column>
+    <el-table-column v-for="col in tableColumns" :prop="col.prop" :label="col.label"></el-table-column>
   </el-table>
 </template>
 
@@ -12,13 +12,9 @@ export default {
       type: Array,
       required: true,
     },
-    tableProp: {
-      type: String,
-      required: true,
-    },
-    tableLabel: {
-      type: String,
-      required: true,
+    tableColumns: {
+      type: Array,
+      default: () => [],
     },
   },
 };
