@@ -9,10 +9,18 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/playlist',
-      component: () => import('../views/Playlist.vue'),
+      path: '/artist',
+      component: () => import('../views/Artist.vue'),
     },
-  ],
+    {
+      path: '/album',
+      component: () => import('../views/Album.vue'),
+    },
+    {
+      path: '/song',
+      component: () => import('../views/Song.vue')
+    }
+  ]
 });
 
 export default router;
