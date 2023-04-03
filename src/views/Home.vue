@@ -20,7 +20,7 @@
 
 <script>
 import axios from 'axios';
-import Carousel from './home/Carousel.vue';
+import Carousel from './components/Carousel.vue';
 
 export default {
   name: 'home',

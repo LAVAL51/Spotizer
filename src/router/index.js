@@ -10,15 +10,15 @@ const router = createRouter({
     },
     {
       path: '/artist',
-      component: () => import('../views/Artist.vue'),
+      component: () => import('../views/pages/Artist.vue'),
     },
     {
       path: '/album',
-      component: () => import('../views/Album.vue'),
+      component: () => import('../views/pages/Album.vue'),
     },
     {
       path: '/song',
-      component: () => import('../views/Song.vue')
+      component: () => import('../views/pages/Song.vue')
     }
   ]
 });
