@@ -1,21 +1,29 @@
 <template>
   <main class="home-page">
     <h1>My playlists</h1>
-    <carousel :list="playlists"></carousel>
 
-    <form @submit.prevent="createPlaylist">
-      <label>
-        Name:
-        <input type="text" v-model="newPlaylistName">
-      </label>
-      <button type="submit">Create</button>
-    </form>
-  </main><ul>
-  <li v-for="playlist in playlists" :key="playlist.id">
-    {{ playlist.name }}
-  </li>
-</ul>
+    <el-from
+    :model="playlistForm"
+    ref="playlistForm"
+    class="form-playlist"
+    :rules="rules">
+      <el-form-item prop="newPlaylistName" class="input">
+        <el-input v-model="playlistForm.newPlaylistName" placeholder="Créer un playlist"></el-input>
+      </el-form-item>
+      <el-from-item>
+        <el-button @click="createPlaylist" type="primary">Ajouter</el-button>
+      </el-from-item>
+    </el-from>
 
+    <el-carousel type="card" trigger="click">
+      <el-carousel-item class="carousel"
+      v-for="element in playlists"
+      :key="element.id"
+      @click="goToDetails(element)">
+      {{ element.name }}
+      </el-carousel-item>
+    </el-carousel>
+  </main>
 </template>
 
 <script>
@@ -31,7 +39,15 @@ export default {
     return {
       playlistsId: JSON.parse(localStorage.getItem('playlistsId')) || [],
       playlists: [],
-      newPlaylistName: '',
+      playlistForm: {
+        newPlaylistName: '',
+      },
+      rules: {
+        newPlaylistName: [
+          {required: true, message: 'Le nom de la playlist est obligatoire', trigger: blur},
+          {min: 4, message: 'Le nom de la playlist doit contenir au moins 4 charactères', trigger: blur},
+        ]
+      }
     };
   },
   async created() {
@@ -47,20 +63,20 @@ export default {
   },
   methods: {
     async createPlaylist() {
-      if (this.newPlaylistName.length < 4) {
-        alert('Playlist name must be at least 4 characters long.');
-        return;
-      }
-
-      const {data} = await axios.post('/api/playlists', { name: this.newPlaylistName });
+      // TODO: faire la vérification du formulaire
+      const {data} = await axios.post('/api/playlists', { name: this.playlistForm.newPlaylistName });
       this.playlistsId.push(data.id);
-      this.newPlaylistName = '';
+      this.playlistForm.newPlaylistName = '';
       await this.fetchPlaylists();
     },
     async fetchPlaylists() {
       const requests = this.playlistsId.map(id => axios.get(`/api/playlists/${id}`));
       const responses = await Promise.all(requests);
       this.playlists = responses.map(response => response.data);
+    },
+    goToDetails(element) {
+      console.log(element);
+      this.$router.push({name: 'playlistDetails', params: {id: element.id}})
     },
     clearLocalStorage() {
       localStorage.clear();
@@ -71,4 +87,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.add-playlist {
+  margin-block: 2rem;
+}
+
+.carousel {
+  background-color: var(--grey);
+}
+
+.form-playlist {
+  display: flex;
+  margin-block: 2rem;
+}
+
+.input {
+    width: 100% !important;
+    margin-right: 3rem;
+  }
 </style>
