@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" style="width: 100%">
+  <el-table :data="tableData" style="width: 99%">
     <el-table-column v-for="col in tableColumns" :prop="col.prop" :label="col.label"></el-table-column>
   </el-table>
 </template>
