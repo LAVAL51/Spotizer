@@ -1,7 +1,7 @@
 <template>
   <main class="song-page">
     <h1>Song</h1>
-    <data-table :table-data="songs" :table-columns="columns"></data-table>
+    <data-table  resource-name="songs" :table-columns="columns"></data-table>
   </main>
 </template>
 

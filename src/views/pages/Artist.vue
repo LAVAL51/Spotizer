@@ -1,7 +1,7 @@
 <template>
   <main class="artist-page">
     <h1>Artists</h1>
-    <data-table :table-data="artists" :table-columns="columns"></data-table>
+    <data-table  resource-name="artists" :table-columns="columns"></data-table>
   </main>
 </template>
 
