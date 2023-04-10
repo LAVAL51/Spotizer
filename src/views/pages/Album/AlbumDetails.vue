@@ -16,7 +16,7 @@
       prop="youtube"
       label="Youtube">
         <template v-slot="scope">
-          <iframe width="200" height="150" :src="scope.row.video"></iframe>
+          <iframe width="200" height="150" :src="scope.row.youtube"></iframe>
         </template>
       </el-table-column>
     </el-table>
