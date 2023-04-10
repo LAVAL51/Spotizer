@@ -14,7 +14,7 @@
         <template v-if="col.prop === 'image'" v-slot="scope">
           <el-image style="width: 100px; height: 100px" :src="scope.row.image"/>
         </template>
-        <template v-if="col.prop === 'youtube'" v-slot="scope">
+        <template v-else-if="col.prop === 'youtube'" v-slot="scope">
           <iframe width="200" height="150" :src="scope.row.video"></iframe>
         </template>
       </el-table-column>
