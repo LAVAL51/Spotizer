@@ -1,33 +1,41 @@
 <template>
   <div>
     <el-table
-    :data="tableData"
-    style="width: 99%"
-    height="700"
-    :class="{'cursor_pointer': isRowClick}"
-    @row-click="sendEvent">
-    <el-table-column
-      v-for="(col, index) in tableColumns"
-      :key="index"
-      :prop="col.prop"
-      :label="col.label"></el-table-column>
+        :data="tableData"
+        style="width: 99%"
+        height="700"
+        :class="{'cursor_pointer': isRowClick}"
+        @row-click="sendEvent">
       <el-table-column
-      align="right">
+          v-for="(col, index) in tableColumns"
+          :key="index"
+          :prop="col.prop"
+          :label="col.label">
+        <template v-if="col.prop === 'image'" v-slot="scope">
+          <el-image style="width: 100px; height: 100px" :src="scope.row.image"/>
+        </template>
+        <template v-if="col.prop === 'youtube'" v-slot="scope">
+          <iframe width="200" height="150" :src="scope.row.video"></iframe>
+        </template>
+      </el-table-column>
+      <el-table-column
+          align="right">
         <template #header>
           <el-input
-          class="search-input"
-          v-model="search"
-          @input="searchData"
-          placeholder="Rechercher..."/>
+              class="search-input"
+              v-model="search"
+              @input="searchData"
+              placeholder="Rechercher..."/>
         </template>
-          <template v-slot="scope">
-            <el-button-group v-if="actions">
+        <template v-slot="scope">
+          <el-button-group v-if="actions">
             <el-button
-            v-for="(action, index) in actions"
-            size="mini"
-            :key="index"
-            :type="action.type"
-            @click="actionBtnClick(scope.row)">{{ action.label }}</el-button>
+                v-for="(action, index) in actions"
+                size="mini"
+                :key="index"
+                :type="action.type"
+                @click="actionBtnClick(scope.row)">{{ action.label }}
+            </el-button>
           </el-button-group>
         </template>
       </el-table-column>
@@ -80,13 +88,13 @@ export default {
   },
   methods: {
     async loadData(resourceName, currentPage) {
-      if(this.isLoading) return;
+      if (this.isLoading) return;
       this.isLoading = true;
 
-      const { data, total } = await axios.get(`/api/${this.resourceName}?page=${currentPage}`);
+      const {data, total} = await axios.get(`/api/${this.resourceName}?page=${currentPage}`);
 
       if (!data.length) {
-        this.currentPage --;
+        this.currentPage--;
         return this.loadData(this.resourceName, this.currentPage);
       }
 
@@ -95,7 +103,7 @@ export default {
       this.isLoading = false;
     },
     async searchData() {
-      const params = {  
+      const params = {
         title: this.search || '',
         name: this.search || '',
       };
@@ -125,6 +133,7 @@ export default {
 .cursor_pointer {
   cursor: pointer;
 }
+
 .search-input {
   width: 350px;
 }

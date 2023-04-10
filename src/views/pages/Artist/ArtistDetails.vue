@@ -3,7 +3,9 @@
     <h1>{{ artist.name }}</h1>
     <el-table
         :data="albums"
-        style="width: 99%">
+        style="width: 99%"
+        :style="{ cursor: 'pointer' }"
+        @row-click="goToDetails">
       <el-table-column
       prop="title"
       label="Title">

@@ -3,10 +3,10 @@
     <h1>My playlists</h1>
 
     <el-from
-    :model="playlistForm"
-    ref="playlistForm"
-    class="form-playlist"
-    :rules="rules">
+        :model="playlistForm"
+        ref="playlistForm"
+        class="form-playlist"
+        :rules="rules">
       <el-form-item prop="newPlaylistName" class="input">
         <el-input v-model="playlistForm.newPlaylistName" placeholder="Créer un playlist"></el-input>
       </el-form-item>
@@ -17,10 +17,10 @@
 
     <el-carousel type="card" trigger="click">
       <el-carousel-item class="carousel"
-      v-for="element in playlists"
-      :key="element.id"
-      @click="goToDetails(element)">
-      {{ element.name }}
+                        v-for="element in playlists"
+                        :key="element.id"
+                        @click="goToDetails(element)">
+        {{ element.name }}
       </el-carousel-item>
     </el-carousel>
   </main>
@@ -51,7 +51,7 @@ export default {
   },
   watch: {
     playlistsId: {
-      handler: function(id) {
+      handler: function (id) {
         localStorage.setItem('playlistsId', JSON.stringify(id));
       },
       deep: true
@@ -60,7 +60,7 @@ export default {
   methods: {
     async createPlaylist() {
       // TODO: faire la vérification du formulaire
-      const {data} = await axios.post('/api/playlists', { name: this.playlistForm.newPlaylistName });
+      const {data} = await axios.post('/api/playlists', {name: this.playlistForm.newPlaylistName});
       this.playlistsId.push(data.id);
       this.playlistForm.newPlaylistName = '';
       await this.fetchPlaylists();
@@ -96,7 +96,7 @@ export default {
 }
 
 .input {
-    width: 100% !important;
-    margin-right: 3rem;
-  }
+  width: 100% !important;
+  margin-right: 3rem;
+}
 </style>
