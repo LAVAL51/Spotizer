@@ -11,7 +11,12 @@
     v-model="dialogVisible"
     :before-close="closeModal">
     <span>Veuillez choisir la playlist ou ajouter le son : {{ selectedSong.name }}</span>
-      <el-select>
+      <el-select v-model="selectedPlaylist">
+        <el-option
+        v-for="playlist in playlists"
+        :key="playlist.id"
+        :label="playlist.name"
+        :value="playlist.id"></el-option>
       </el-select>
       <template #footer>
       <span>
@@ -38,6 +43,8 @@ export default {
     return {
       dialogVisible: false,
       selectedSong: {},
+      playlists: [],
+      selectedPlaylist: '',
       songs: [],
       columns: [
         { prop: 'title', label: 'Title' },
@@ -62,10 +69,23 @@ export default {
       const {data} = await axiox.get(`/api/${resource}`);
       this[resource] = data;
     },
-    openDialog(data) {
+    async fetchPlaylists() {
+      const list = JSON.parse(localStorage.getItem('playlistsId'));
+      const requests = list.map(id => axiox.get(`/api/playlists/${id}`));
+      const responses = await Promise.all(requests);
+      this.playlists = responses.map(response => response.data);
+    },
+    async openDialog(data) {
+      await this.fetchPlaylists();
       this.selectedSong = data;
       this.dialogVisible = true;
     },
+    async save() {
+      const id = this.selectedPlaylist;
+      await axiox.patch(`/api/playlists/${id}`, {songs: this.selectedSong});
+      this.selectedPlaylist = '';
+      this.closeModal();
+    }
   },
   async created() {
     await this.loadData('songs');

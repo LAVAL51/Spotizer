@@ -59,7 +59,6 @@ export default {
   },
   methods: {
     async createPlaylist() {
-      // TODO: faire la vérification du formulaire
       const {data} = await axios.post('/api/playlists', {name: this.playlistForm.newPlaylistName});
       this.playlistsId.push(data.id);
       this.playlistForm.newPlaylistName = '';
