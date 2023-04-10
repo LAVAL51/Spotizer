@@ -6,6 +6,23 @@
       :key="index"
       :prop="col.prop"
       :label="col.label"></el-table-column>
+      <el-table-column
+      align="right">
+        <template #header>
+          <el-input
+          class="search-input"
+          v-model="search"
+          size="mini"
+          placeholder="Rechercher..."/>
+        </template>
+          <el-button-group v-if="actions">
+            <el-button
+            v-for="(action, index) in actions"
+            size="mini"
+            :key="index"
+            :type="action.type">{{ action.label }}</el-button>
+          </el-button-group>
+      </el-table-column>
     </el-table>
     <el-pagination
         background
@@ -32,6 +49,9 @@ export default {
       type: Array,
       default: () => [],
     },
+    actions: {
+      type: Array,
+    }
   },
   data() {
     return {
@@ -39,6 +59,7 @@ export default {
       currentPage: 1,
       pageSize: 30,
       totalItems: 0,
+      search: '',
     };
   },
   async created() {
@@ -47,6 +68,11 @@ export default {
   methods: {
     async loadData(resourceName, currentPage) {
       const { data, total } = await axios.get(`/api/${resourceName}?page=${currentPage}`);
+      if (!data.length) {
+        this.currentPage --;
+        return this.loadData(this.resourceName, this.currentPage);
+      }
+      console.log(data, total);
       this.tableData = data;
       this.totalItems = Math.ceil(total / this.pageSize);
     },
@@ -57,3 +83,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.search-input {
+  width: 350px;
+}
+</style>

@@ -1,17 +1,29 @@
 <template>
-  <div>
+  <main>
     <h1>Playlist : {{ playlist.name }}</h1>
-  </div>
+    <data-table :resourceName="playlist.name" :tableColumns="playlist.songs" :actions="actions"></data-table>
+  </main>
 </template>
 
 <script>
 import axios from 'axios';
+import dataTable from '../components/DataTable.vue';
 
 export default {
   name: 'playlist-details',
+  components: {
+    dataTable,
+  },
   data() {
     return {
       playlist: [],
+      actions:[
+        {
+          label: 'Supprimer',
+          event: 'remove',
+          type: 'danger',
+        }
+      ]
     };
   },
   methods: {

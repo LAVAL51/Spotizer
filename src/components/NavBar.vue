@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar">
-    <input
+    <!-- <input
     type="text"
     class="input"
-    placeholder="Rechercher...">
+    placeholder="Rechercher..."> -->
   </nav>
 </template>
 
