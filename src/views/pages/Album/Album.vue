@@ -4,6 +4,7 @@
     <data-table
     resource-name="albums"
     :table-columns="columns"
+    :isRowClick="true"
     @rowClicked="goToDetails"></data-table>
   </main>
 </template>

@@ -4,8 +4,9 @@
     :data="tableData"
     style="width: 99%"
     height="700"
+    :class="{'cursor_pointer': isRowClick}"
     @row-click="sendEvent">
-      <el-table-column
+    <el-table-column
       v-for="(col, index) in tableColumns"
       :key="index"
       :prop="col.prop"
@@ -55,6 +56,10 @@ export default {
     },
     actions: {
       type: Array,
+    },
+    isRowClick: {
+      type: Boolean,
+      default: false,
     }
   },
   data() {
@@ -98,6 +103,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.cursor_pointer {
+  cursor: pointer;
+}
 .search-input {
   width: 350px;
 }

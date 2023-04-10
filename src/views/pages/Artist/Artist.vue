@@ -4,6 +4,7 @@
     <data-table
     resource-name="artists"
     :table-columns="columns"
+    :isRowClick="true"
     @rowClicked="goToDetails"></data-table>
   </main>
 </template>
