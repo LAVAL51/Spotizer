@@ -13,8 +13,11 @@
           label="Length">
       </el-table-column>
       <el-table-column
-          prop="youtube"
-          label="Youtube">
+      prop="youtube"
+      label="Youtube">
+        <template v-slot="scope">
+          <iframe width="200" height="150" :src="scope.row.image"></iframe>
+        </template>
       </el-table-column>
     </el-table>
   </main>

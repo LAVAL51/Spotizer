@@ -20,14 +20,16 @@
           @input="searchData"
           placeholder="Rechercher..."/>
         </template>
-          <el-button-group v-if="actions">
-          <el-button
-          v-for="(action, index) in actions"
-          size="mini"
-          :key="index"
-          :type="action.type"
-          @click="actionBtnClick(action, index)">{{ action.label }}</el-button>
-        </el-button-group>
+          <template v-slot="scope">
+            <el-button-group v-if="actions">
+            <el-button
+            v-for="(action, index) in actions"
+            size="mini"
+            :key="index"
+            :type="action.type"
+            @click="actionBtnClick(scope.row)">{{ action.label }}</el-button>
+          </el-button-group>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -111,9 +113,8 @@ export default {
     sendEvent(data) {
       this.$emit('rowClicked', data);
     },
-    actionBtnClick(action, index) {
-      console.log(index);
-      // this.$emit(`addToPlaylist`, index);
+    actionBtnClick(data) {
+      this.$emit(`addToPlaylist`, data);
     }
   },
 };

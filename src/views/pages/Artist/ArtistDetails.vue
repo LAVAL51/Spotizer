@@ -3,20 +3,21 @@
     <h1>{{ artist.name }}</h1>
     <el-table
         :data="albums"
-        style="width: 99%"
-        :class="{'cursor_pointer': true}"
-        @row-click="goToDetails">
+        style="width: 99%">
       <el-table-column
-          prop="title"
-          label="Title">
+      prop="title"
+      label="Title">
       </el-table-column>
       <el-table-column
-          prop="albumtype.name"
-          label="Album Type">
+      prop="albumtype.name"
+      label="Album Type">
       </el-table-column>
       <el-table-column
-          prop="image"
-          label="Image">
+      prop="image"
+      label="Image">
+      <template v-slot="scope">
+        <el-image style="width: 100px; height: 100px" :src="scope.row.image"/>
+      </template>
       </el-table-column>
     </el-table>
   </main>

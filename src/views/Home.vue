@@ -28,13 +28,9 @@
 
 <script>
 import axios from 'axios';
-import carousel from './components/Carousel.vue';
 
 export default {
   name: 'home',
-  components: {
-    carousel
-  },
   data() {
     return {
       playlistsId: JSON.parse(localStorage.getItem('playlistsId')) || [],
