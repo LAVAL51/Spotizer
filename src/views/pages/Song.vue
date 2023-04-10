@@ -6,6 +6,22 @@
     :table-columns="columns"
     :actions="actions"
     @addToPlaylist="openDialog"></data-table>
+    <el-dialog
+    title="Ajouter un son à une playlist"
+    v-model="dialogVisible"
+    :before-close="closeModal">
+    <span>Veuillez choisir la playlist ou ajouter le son : {{ selectedSong.name }}</span>
+      <el-select>
+      </el-select>
+      <template #footer>
+      <span>
+        <el-button @click="closeModal">Annuler</el-button>
+        <el-button type="primary" @click="save">
+          Ajouter
+        </el-button>
+      </span>
+    </template>
+    </el-dialog>
   </main>
 </template>
 
@@ -20,6 +36,8 @@ export default {
   },
   data() {
     return {
+      dialogVisible: false,
+      selectedSong: {},
       songs: [],
       columns: [
         { prop: 'title', label: 'Title' },
@@ -36,12 +54,17 @@ export default {
     }
   },
   methods: {
+    closeModal() {
+      this.selectedSong = {};
+      this.dialogVisible = false;
+    },
     async loadData(resource) {
       const {data} = await axiox.get(`/api/${resource}`);
       this[resource] = data;
     },
-    openDialog(index) {
-      console.log(index);
+    openDialog(data) {
+      this.selectedSong = data;
+      this.dialogVisible = true;
     },
   },
   async created() {
