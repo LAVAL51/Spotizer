@@ -17,16 +17,17 @@
           <el-input
           class="search-input"
           v-model="search"
-          size="mini"
+          @input="searchData"
           placeholder="Rechercher..."/>
         </template>
           <el-button-group v-if="actions">
-            <el-button
-            v-for="(action, index) in actions"
-            size="mini"
-            :key="index"
-            :type="action.type">{{ action.label }}</el-button>
-          </el-button-group>
+          <el-button
+          v-for="(action, index) in actions"
+          size="mini"
+          :key="index"
+          :type="action.type"
+          @click="actionBtnClick(action, index)">{{ action.label }}</el-button>
+        </el-button-group>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -80,7 +81,7 @@ export default {
       if(this.isLoading) return;
       this.isLoading = true;
 
-      const { data, total } = await axios.get(`/api/${resourceName}?page=${currentPage}`);
+      const { data, total } = await axios.get(`/api/${this.resourceName}?page=${currentPage}`);
 
       if (!data.length) {
         this.currentPage --;
@@ -91,6 +92,18 @@ export default {
       this.totalItems = Math.ceil(total / this.pageSize);
       this.isLoading = false;
     },
+    async searchData() {
+      const params = {  
+        title: this.search || '',
+        name: this.search || '',
+      };
+
+      const {data, total} = await axios.get(`/api/${this.resourceName}`, {
+        params: params,
+      })
+      this.tableData = data;
+      this.totalItems = Math.ceil(total / this.pageSize);
+    },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
       this.loadData(this.resourceName, this.currentPage);
@@ -98,6 +111,10 @@ export default {
     sendEvent(data) {
       this.$emit('rowClicked', data);
     },
+    actionBtnClick(action, index) {
+      console.log(index);
+      // this.$emit(`addToPlaylist`, index);
+    }
   },
 };
 </script>

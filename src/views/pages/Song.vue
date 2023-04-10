@@ -4,7 +4,8 @@
     <data-table
     resource-name="songs"
     :table-columns="columns"
-    :actions="actions"></data-table>
+    :actions="actions"
+    @addToPlaylist="openDialog"></data-table>
   </main>
 </template>
 
@@ -34,14 +35,17 @@ export default {
       ],
     }
   },
-  async created() {
-    await this.loadData('songs');
-  },
   methods: {
     async loadData(resource) {
       const {data} = await axiox.get(`/api/${resource}`);
       this[resource] = data;
     },
+    openDialog(index) {
+      console.log(index);
+    },
+  },
+  async created() {
+    await this.loadData('songs');
   },
 };
 </script>
