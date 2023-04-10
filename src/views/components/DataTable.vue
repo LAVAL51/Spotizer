@@ -64,6 +64,7 @@ export default {
       pageSize: 30,
       totalItems: 0,
       search: '',
+      isLoading: false,
     };
   },
   async created() {
@@ -71,13 +72,19 @@ export default {
   },
   methods: {
     async loadData(resourceName, currentPage) {
+      if(this.isLoading) return;
+      this.isLoading = true;
+
       const { data, total } = await axios.get(`/api/${resourceName}?page=${currentPage}`);
+
       if (!data.length) {
         this.currentPage --;
         return this.loadData(this.resourceName, this.currentPage);
       }
+
       this.tableData = data;
       this.totalItems = Math.ceil(total / this.pageSize);
+      this.isLoading = false;
     },
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
