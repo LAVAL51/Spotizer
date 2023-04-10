@@ -75,7 +75,6 @@ export default {
       this.playlists = responses.map(response => response.data);
     },
     goToDetails(element) {
-      console.log(element);
       this.$router.push({name: 'playlistDetails', params: {id: element.id}})
     },
     clearLocalStorage() {

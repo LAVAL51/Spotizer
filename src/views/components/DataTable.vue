@@ -2,10 +2,10 @@
   <div>
     <el-table :data="tableData" style="width: 99%">
       <el-table-column
-          v-for="col in tableColumns"
-          :prop="col.prop"
-          :label="col.label"
-      ></el-table-column>
+      v-for="(col, index) in tableColumns"
+      :key="index"
+      :prop="col.prop"
+      :label="col.label"></el-table-column>
     </el-table>
     <el-pagination
         background
