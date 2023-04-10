@@ -72,7 +72,6 @@ export default {
         this.currentPage --;
         return this.loadData(this.resourceName, this.currentPage);
       }
-      console.log(data, total);
       this.tableData = data;
       this.totalItems = Math.ceil(total / this.pageSize);
     },
