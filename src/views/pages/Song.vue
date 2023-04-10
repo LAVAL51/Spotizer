@@ -1,7 +1,10 @@
 <template>
   <main class="song-page">
     <h1>Song</h1>
-    <data-table  resource-name="songs" :table-columns="columns"></data-table>
+    <data-table
+    resource-name="songs"
+    :table-columns="columns"
+    :actions="actions"></data-table>
   </main>
 </template>
 
@@ -21,6 +24,13 @@ export default {
         { prop: 'title', label: 'Title' },
         { prop: 'length', label: 'Length' },
         { prop: 'youtube', label: 'Youtube' },
+      ],
+      actions: [
+        {
+          label: 'Ajouter à une playlist',
+          event: 'addToPlaylist',
+          type: 'primary',
+        },
       ],
     }
   },

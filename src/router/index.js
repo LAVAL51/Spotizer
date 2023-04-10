@@ -6,18 +6,22 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
       component: Home,
     },
     {
       path: '/artists',
-      component: () => import('../views/pages/Artist.vue'),
+      name: 'artists',
+      component: () => import('../views/pages/Artist/Artist.vue'),
     },
     {
       path: '/albums',
-      component: () => import('../views/pages/Album.vue'),
+      name: 'albums',
+      component: () => import('../views/pages/Album/Album.vue'),
     },
     {
       path: '/songs',
+      name: 'songs',
       component: () => import('../views/pages/Song.vue')
     },
     {
@@ -28,8 +32,13 @@ const router = createRouter({
     {
       path: '/artists/:id',
       name: 'artistsDetails',
-      component: () => import('../views/pages/ArtistDetails.vue')
+      component: () => import('../views/pages/Artist/ArtistDetails.vue')
     },
+    {
+      path: '/albums/:id',
+      name: 'albumsDetails',
+      component: () => import('../views/pages/Album/AlbumDetails.vue')
+    }
   ]
 });
 

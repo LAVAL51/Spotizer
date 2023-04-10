@@ -10,7 +10,7 @@
 
 <script>
 import axiox from 'axios';
-import dataTable from '../components/DataTable.vue';
+import dataTable from '../../components/DataTable.vue';
 
 export default {
   name: 'artist',

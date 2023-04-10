@@ -1,12 +1,15 @@
 <template>
   <main class="album-page">
     <h1>Album</h1>
-    <data-table resource-name="albums" :table-columns="columns"></data-table>
+    <data-table
+    resource-name="albums"
+    :table-columns="columns"
+    @rowClicked="goToDetails"></data-table>
   </main>
 </template>
 
 <script>
-import dataTable from '../components/DataTable.vue';
+import dataTable from '../../components/DataTable.vue';
 
 export default {
   name: 'album',
@@ -21,6 +24,11 @@ export default {
         { prop: 'image', label: 'Image' },
       ],
     }
+  },
+  methods: {
+    goToDetails(data) {
+      this.$router.push({name: 'albumsDetails', params: {id: data.id}})
+    },
   },
 };
 </script>
