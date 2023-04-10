@@ -16,15 +16,15 @@
         <span class="material-icons">home</span>
         <span class="text">Home</span>
       </router-link>
-      <router-link class="button" to="/artist">
+      <router-link class="button" to="/artists">
         <span class="material-icons">groups</span>
         <span class="text">Artists</span>
       </router-link>
-      <router-link class="button" to="/album">
+      <router-link class="button" to="/albums">
         <span class="material-icons">library_music</span>
         <span class="text">Albums</span>
       </router-link>
-      <router-link class="button" to="/song">
+      <router-link class="button" to="/songs">
         <span class="material-icons">queue_music</span>
         <span class="text">Songs</span>
       </router-link>

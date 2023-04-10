@@ -9,22 +9,27 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/artist',
+      path: '/artists',
       component: () => import('../views/pages/Artist.vue'),
     },
     {
-      path: '/album',
+      path: '/albums',
       component: () => import('../views/pages/Album.vue'),
     },
     {
-      path: '/song',
+      path: '/songs',
       component: () => import('../views/pages/Song.vue')
     },
     {
       path: '/playlist/:id',
       name: 'playlistDetails',
       component: () => import('../views/pages/PlaylistDetails.vue')
-    }
+    },
+    {
+      path: '/artists/:id',
+      name: 'artistsDetails',
+      component: () => import('../views/pages/ArtistDetails.vue')
+    },
   ]
 });
 

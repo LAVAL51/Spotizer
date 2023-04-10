@@ -1,7 +1,10 @@
 <template>
   <main class="artist-page">
     <h1>Artists</h1>
-    <data-table  resource-name="artists" :table-columns="columns"></data-table>
+    <data-table
+    resource-name="artists"
+    :table-columns="columns"
+    @rowClicked="goToDetails"></data-table>
   </main>
 </template>
 
@@ -29,6 +32,9 @@ export default {
     async loadData(resource) {
       const {data} = await axiox.get(`/api/${resource}`);
       this[resource] = data;
+    },
+    goToDetails(data) {
+      this.$router.push({name: 'artistsDetails', params: {id: data.id}})
     },
   },
 };

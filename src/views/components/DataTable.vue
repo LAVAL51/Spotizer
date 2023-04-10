@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-table :data="tableData" style="width: 99%">
+    <el-table
+    :data="tableData"
+    style="width: 99%"
+    height="700"
+    @row-click="sendEvent">
       <el-table-column
       v-for="(col, index) in tableColumns"
       :key="index"
@@ -78,6 +82,9 @@ export default {
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
       this.loadData(this.resourceName, this.currentPage);
+    },
+    sendEvent(data) {
+      this.$emit('rowClicked', data);
     },
   },
 };
